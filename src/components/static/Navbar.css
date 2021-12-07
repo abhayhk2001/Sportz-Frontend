@@ -1,0 +1,50 @@
+header {
+  position: sticky;
+  top: 0;
+}
+
+.left-align {
+  width: 65vw;
+}
+
+.navbar-container {
+  height: calc(max(13vh, 40px));
+  display: flex;
+  padding-left: (10.41vw);
+  align-items: center;
+  background-color: red;
+}
+
+.navigation {
+  display: flex;
+  justify-content: space-evenly;
+  padding: 1px 11px;
+  width: 30vw;
+}
+
+div.navigation > * {
+  margin-right: 65px;
+  text-decoration: none;
+  color: blue;
+  font-size: 17px;
+  font-weight: bold;
+}
+
+.github-logo {
+  padding: 1px;
+  margin: 0px calc(max(5px, 0.625vw));
+}
+
+.navbar-logo {
+  height: calc(max(20px, 2.5vw));
+  width: calc(max(20px, 2.5vw));
+  filter: drop-shadow(0px 3px 3px rgba(0, 0, 0, 0.25));
+}
+
+.contribute {
+  font-size: 20px;
+  font-weight: bold;
+  text-decoration: none;
+  color: black;
+  text-shadow: 0px 2px 1px rgba(0, 0, 0, 0.25);
+}
