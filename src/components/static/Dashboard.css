@@ -1,0 +1,24 @@
+.table {
+  margin: 5vh 5vw;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 2em;
+  justify-content: center;
+}
+
+.card-container {
+  width: 30vw;
+  display: flex;
+  justify-content: center;
+  padding: 5em 3em;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

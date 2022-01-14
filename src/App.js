@@ -3,14 +3,21 @@ import "./App.css";
 import { Routes, Route } from "react-router-dom";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
+import Faculty from "./components/Faculty";
+import Students from "./components/Students";
+import Matches from "./components/Matches";
+import Events from "./components/Events";
 
 function App() {
   return (
     <>
       <Routes>
-        {/* <Route path="signup" element={<SignUp />} /> */}
         <Route path="login" element={<Login />} />
         <Route path="dashboard" element={<Dashboard />} />
+        <Route path="faculty" element={<Faculty />} />
+        <Route path="students" element={<Students />} />
+        <Route path="matches" element={<Matches />} />
+        <Route path="events" element={<Events />} />
         <Route
           path="*"
           element={

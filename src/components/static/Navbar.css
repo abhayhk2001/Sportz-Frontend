@@ -2,34 +2,27 @@ header {
   position: sticky;
   top: 0;
 }
-
-.left-align {
-  width: 65vw;
-}
-
 .navbar-container {
   height: calc(max(13vh, 40px));
   display: flex;
-  padding-left: (10.41vw);
   align-items: center;
-  background-color: red;
+  background-color: lightblue;
 }
 
 .navigation {
   display: flex;
-  justify-content: space-evenly;
+  /* justify-content: space-evenly; */
   padding: 1px 11px;
   width: 30vw;
 }
 
 div.navigation > * {
-  margin-right: 65px;
+  padding: 0 3em;
   text-decoration: none;
   color: blue;
   font-size: 17px;
   font-weight: bold;
 }
-
 .github-logo {
   padding: 1px;
   margin: 0px calc(max(5px, 0.625vw));
