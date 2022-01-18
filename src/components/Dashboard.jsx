@@ -1,16 +1,32 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Card, CardContent, Typography } from "@material-ui/core";
 import Navbar from "./Navbar";
-
+import axios from "axios";
 import "./static/Dashboard.css";
 
 export default function Dashboard() {
-  var count = {
-    events: 1,
-    matches: 2,
-    students: 3,
-    sports: 4,
+  const [count, setCount] = useState({});
+
+  useEffect(() => {
+    fetchData();
+  }, []);
+  const [isLoading, setIsLoading] = useState(false);
+
+  const fetchData = () => {
+    setIsLoading(true);
+    axios.get("http://127.0.0.1:8000/api/admin/countinfo").then((response) => {
+      console.log(response.data);
+      setCount(response.data);
+      setIsLoading(false);
+    });
   };
+  if (isLoading) {
+    return (
+      <>
+        <p>Loading...</p>
+      </>
+    );
+  }
   return (
     <>
       <Navbar />
