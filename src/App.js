@@ -10,24 +10,23 @@ import Events from "./components/Events";
 
 function App() {
   return (
-    <>
-      <Routes>
-        <Route path="login" element={<Login />} />
-        <Route path="dashboard" element={<Dashboard />} />
-        <Route path="faculty" element={<Faculty />} />
-        <Route path="students" element={<Students />} />
-        <Route path="matches" element={<Matches />} />
-        <Route path="events" element={<Events />} />
-        <Route
-          path="*"
-          element={
-            <main style={{ padding: "1rem" }}>
-              <p>There's nothing here!</p>
-            </main>
-          }
-        />
-      </Routes>
-    </>
+    <Routes>
+      <Route path="" element={<Login />} />
+      <Route path="login" element={<Login />} />
+      <Route path="dashboard" element={<Dashboard />} />
+      <Route path="faculty" element={<Faculty />} />
+      <Route path="students" element={<Students />} />
+      <Route path="matches" element={<Matches />} />
+      <Route path="events" element={<Events />} />
+      <Route
+        path="*"
+        element={
+          <main style={{ padding: "1rem" }}>
+            <p>404 Error: Page Not Found</p>
+          </main>
+        }
+      />
+    </Routes>
   );
 }
 

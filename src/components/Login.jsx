@@ -1,32 +1,38 @@
 import { useNavigate } from "react-router-dom";
 import React from "react";
 import { useFormik } from "formik";
+import "./static/Login.css";
 
 function setToken(userToken) {
   sessionStorage.setItem("token", JSON.stringify(userToken));
 }
 
 async function loginUser(credentials) {
-  return fetch("http://localhost:8080/login", {
+  fetch("http://localhost:8000/api/admin/login", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
     body: JSON.stringify(credentials),
-  }).then((data) => data.json());
+  })
+    .then((data) => data.json())
+    .then((data) => {
+      setToken(data.user);
+    })
+    .catch((err) => {
+      console.error(err);
+    });
 }
 
 const validate = (values) => {
   const errors = {};
-  if (!values.email) {
-    errors.email = "Required";
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = "Invalid email address";
+  if (!values.username) {
+    errors.username = "Required";
+  } else if (!/^[A-Za-z0-9_]+$/i.test(values.username)) {
+    errors.username = "Invalid Username";
   }
   if (!values.password) {
     errors.password = "Required";
-  } else if (values.password.length > 8) {
-    errors.password = "Password must be at least 8 characters long";
   }
   return errors;
 };
@@ -35,19 +41,15 @@ const LoginForm = () => {
   const navigate = useNavigate();
   const formik = useFormik({
     initialValues: {
-      email: "",
+      username: "",
       password: "",
     },
     validate,
     onSubmit: async (values) => {
-      const username = values.email;
+      const username = values.username;
       const password = values.password;
-      const token = await loginUser({
-        username,
-        password,
-      });
-      setToken(token);
-      if (token) {
+      await loginUser({ username, password });
+      if (sessionStorage.getItem("token")) {
         navigate("/dashboard");
       } else
         alert(
@@ -56,35 +58,43 @@ const LoginForm = () => {
     },
   });
   return (
-    <form onSubmit={formik.handleSubmit}>
-      <label htmlFor="email">Email Address</label>
-      <input
-        id="email"
-        name="email"
-        type="email"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.email}
-      />
-      {formik.touched.email && formik.errors.email ? (
-        <div>{formik.errors.email}</div>
-      ) : null}
-
-      <label htmlFor="password">Password</label>
-      <input
-        id="password"
-        name="password"
-        type="password"
-        onChange={formik.handleChange}
-        onBlur={formik.handleBlur}
-        value={formik.values.password}
-      />
-      {formik.touched.password && formik.errors.password ? (
-        <div>{formik.errors.password}</div>
-      ) : null}
-
-      <button type="submit">Submit</button>
-    </form>
+    <div className="container">
+      <form onSubmit={formik.handleSubmit}>
+        <div className="form-container">
+          <div className="input-container">
+            <label htmlFor="username">Username</label>
+            <input
+              id="username"
+              name="username"
+              type="text"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.username}
+            />
+            {formik.touched.username && formik.errors.username ? (
+              <div>{formik.errors.username}</div>
+            ) : null}
+          </div>
+          <div className="input-container">
+            <label htmlFor="password">Password </label>
+            <input
+              id="password"
+              name="password"
+              type="password"
+              onChange={formik.handleChange}
+              onBlur={formik.handleBlur}
+              value={formik.values.password}
+            />
+            {formik.touched.password && formik.errors.password ? (
+              <div>{formik.errors.password}</div>
+            ) : null}
+          </div>
+          <div className="input-container">
+            <button type="submit">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 };
 

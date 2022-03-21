@@ -42,6 +42,7 @@ function Events() {
   const fetchData = () => {
     setIsLoading(true);
     axios.get("http://127.0.0.1:8000/api/admin/eventsinfo").then((response) => {
+      console.log(response.data);
       setData(response.data);
       setRowNames(Object.keys(response.data[0]));
       setRows(response.data);
